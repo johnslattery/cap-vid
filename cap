@@ -1,0 +1,28 @@
+#!/bin/bash
+
+. ~/cap-vid/env
+
+[[ ! -e $1 ]] || {
+  printf "File '%s' exists. Exiting.\n" "$1" >&2
+  exit 1
+}
+
+gst-launch --eos-on-shutdown --gst-debug-level=1 --gst-debug-no-color \
+  --verbose \
+  v4l2src device="$VIDEO_DEVICE" do-timestamp=true norm="$TV_NORM" \
+    ! "$VIDEO_CAPABILITIES" \
+    ! videorate \
+    ! "$VIDEO_CAPABILITIES" \
+    ! queue \
+    ! mux. \
+  alsasrc device="$AUDIO_DEVICE" do-timestamp=true \
+    ! "$AUDIO_CAPABILITIES" \
+    ! audiorate \
+    ! audioresample \
+    ! "$AUDIO_CAPABILITIES, rate=44100" \
+    ! audioconvert \
+    ! "$AUDIO_CAPABILITIES, rate=44100, channels=1" \
+    ! queue \
+    ! mux. \
+  avimux name=mux \
+    ! filesink location="$1"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+avconv -i "$1" -c:v libx264 -b:v 2000k -c:a aac -b:a 100k \
+  -strict experimental -filter:v yadif=0:-1:0,setsar=8:9 "$2"

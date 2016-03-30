@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TV_NORM='NTSC-M'
+VIDEO_DEVICE='/dev/video1'
+VIDEO_INPUT='0'
+AUDIO_DEVICE='hw:1,0'
+VIDEO_CAPABILITIES='video/x-raw-yuv, format=(fourcc)YUY2'
+AUDIO_CAPABILITIES='audio/x-raw-int'
