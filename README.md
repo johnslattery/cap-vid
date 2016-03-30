@@ -1,0 +1,1 @@
+Stuff to capture and digitize video from a Sony Video 8 Handycam CCD-TRV40 NTSC analog, monaural, 8mm video camcorder using a Haupauge USB-Live 2 analog video digitizer, GStreamer, and avconv on Debian 8.
