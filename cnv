@@ -1,4 +1,5 @@
 #!/bin/bash
 
-avconv -i "$1" -c:v libx264 -b:v 2000k -c:a aac -b:a 100k \
-  -strict experimental -filter:v yadif=0:-1:0,setsar=8:9 "$2"
+avconv -i "$1" -c:v libx264 -c:a libfdk_aac -vbr 3 -strict experimental \
+  -filter:v "yadif, hqdn3d, setsar=8:9, crop=out_w=in_w-42:out_h=in_h-28, \
+  pad=width=720:height=480:x=21:y=14" "$2"
